@@ -37,8 +37,6 @@ Bundle 'IndexedSearch'
 Bundle 'matchit.zip'
 " Gvim colorscheme
 Bundle 'Wombat'
-" Yank history navigation
-Bundle 'YankRing.vim'
 " SuperTab
 Bundle 'ervandew/supertab'
 " Bash support
@@ -59,6 +57,7 @@ Bundle 'OmniCppComplete'
 
 Bundle 'ruby.vim'
 " Git integration
+Bundle 'fugitive.vim'
 Bundle 'motemen/git-vim'
 " Tab list panel
 Bundle 'kien/tabman.vim'
@@ -177,17 +176,18 @@ highlight Pmenu ctermfg=1 ctermbg=4 guibg=grey30
 set laststatus=2
 
 " Format the statusline
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
+set statusline=[%{HasPaste()}]\ %F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [Line=%l:%c/%L]\ [CWD=%r%{CurDir()}%h]\ [%{fugitive#statusline()}]
 
 
 function! CurDir()
-    let curdir = substitute(getcwd(), "/Users/benoitdaccache/", "~/", "g")
+    let curdir = substitute(getcwd(), "/home/ben/", "~/", "g")
     return curdir
 endfunction
 
 function! HasPaste()
     if &paste
-        return 'PASTE MODE  '
+        return 'PASTE MODE '
     else
         return ''
     endif
@@ -342,7 +342,7 @@ map <leader>f :MRU<CR>
 " => Vim grep
 """"""""""""""""""""""""""""""
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
-set grepprg=/bin/grep\ -nH
+set grepprg=/usr/bin/grep\ -nH
 
 """"""""""""""""""""""""""""""
 " => Remaps
