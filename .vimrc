@@ -51,7 +51,8 @@ Bundle 'Cppcheck-compiler'
 
 Bundle 'Brace-Complete-for-CCpp'
 
-Bundle  'cpp.vim'
+Bundle 'cpp.vim'
+Bundle 'c.vim'
 
 Bundle 'OmniCppComplete'
 
@@ -65,6 +66,7 @@ Bundle 'neocomplcache'
 Bundle 'clang-complete'
 
 Bundle 'derekwyatt/vim-scala'
+
 
 
 " Installing plugins the first time
