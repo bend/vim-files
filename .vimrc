@@ -281,10 +281,14 @@ endfunction
 " => CPP Section
 """"""""""""""""""""""""""""""
 " configure tags - add additional tags here or comment out not-used ones
+autocmd FileType cpp set omnifunc=omni#cpp#complete#Main
+set nocp
 set tags+=~/.vim/tags/cpp
 set tags+=~/.vim/tags/qt4
 " build tags of your own project with Ctrl-F12
-map <C-F6> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
+inoremap <F12> <Esc>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>
 
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
@@ -313,7 +317,7 @@ let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_ShowAccess = 1
 " This option can be use if you don't want to parse using namespace declarations in included files and want to add
 " namespaces that are always used in your project.
-let OmniCpp_DefaultNamespaces = ["std"]
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " Complete Behaviour
 let OmniCpp_MayCompleteDot = 0
 let OmniCpp_MayCompleteArrow = 0
@@ -324,15 +328,14 @@ let OmniCpp_SelectFirstItem = 0
 "automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-autocmd FileType cpp set omnifunc=omni#cpp#complete#Main
 
 """"""""""""""""""""""""""""""
 " => Ruby Section
 """"""""""""""""""""""""""""""
 "Now using ruby plugin
-"autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
