@@ -38,8 +38,8 @@ Bundle 'Wombat'
 " Bash support
 Bundle 'bash-support.vim'
 " Markdown
-Bundle 'instant-markdown.vim'
-Bundle 'Markdown'
+" Bundle 'instant-markdown.vim'
+" Bundle 'Markdown'
 " C and C++ stuff
 Bundle 'Brace-Complete-for-CCpp'
 Bundle 'cpp.vim'
@@ -57,8 +57,14 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
 " Scala
 Bundle 'derekwyatt/vim-scala'
+Bundle 'scala.vim'
+
 
 Bundle 'vundle'
+
+Bundle 'Erlang-plugin-package'
+
+Bundle 'Lokaltog/vim-powerline'
 
 " Disabled
 " Autocompletion
@@ -137,6 +143,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+" Let vim share clipboard
+set clipboard=unnamed
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -220,6 +228,9 @@ set tabstop=4
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Close preview window after completion
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_complete_in_comments_and_strings = 1
+let g:ycm_global_ycm_extra_conf ='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
