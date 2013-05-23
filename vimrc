@@ -111,6 +111,9 @@ set nocompatible
 " save as sudo
 ca w!! w !sudo tee "%"
 
+" Enable mouse support in vim
+set mouse=a
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -203,6 +206,17 @@ function! HasPaste()
         return ''
     endif
 endfunction
+
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -436,4 +450,5 @@ endif
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
 
-
+" Hide the default mode text
+set noshowmode
