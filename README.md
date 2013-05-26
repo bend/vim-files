@@ -1,4 +1,7 @@
 # Usage
-Clone the repo and copy .vimrc file in your HOME directory.
-Run vim
+Clone the repo in $HOME and execute the following
+mv ~/vim-files ~/.vim
+mv ~/.vim/vimrc ~/.vimrc
+Open vim and it will install all the required plugins
+
 
