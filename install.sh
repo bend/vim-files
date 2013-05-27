@@ -34,7 +34,7 @@ if [ -f $HOME/.vimrc ];then
 fi
 
 mv vim-files/vimrc $HOME/.vimrc
-mv vim-files $HOME/.vim
+mv vim-files/ $HOME/.vim/
 
 
 
