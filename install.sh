@@ -29,7 +29,7 @@ if [ -f $HOME/.vim ];then
     mv $HOME/.vim vim.backup
 fi
 
-if [ -f $HOME/.vimrc];then
+if [ -f $HOME/.vimrc ];then
     mv $HOME/.vimrc vimrc.backup
 fi
 
