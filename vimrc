@@ -1,87 +1,69 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vundle
+" => NeoBundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off
 
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle..."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let iCanHazVundle=0
+if has('vim_starting')
+  set nocompatible               " Be iMproved
+
+  " Required:
+  set runtimepath+=/home/ben/.vim/bundle/neobundle.vim/
 endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call neobundle#begin(expand('/home/ben/.vim/bundle'))
 
 " Better file browse"r
-Bundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdtree'
 " Code commenter
-Bundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdcommenter'
 " Class/module browser
-Bundle 'majutsushi/tagbar'
+NeoBundle 'majutsushi/tagbar'
 " Indent text object
-Bundle 'michaeljsmith/vim-indent-object'
-" Python mode (indentation, doc, refactor, lints, code checking, motion and
-" operators, highlighting, run and ipdb breakpoints)
-Bundle 'klen/python-mode'
-" Python code checker
-Bundle 'pyflakes.vim'
+NeoBundle 'michaeljsmith/vim-indent-object'
+
 " Search results counter
-Bundle 'IndexedSearch'
+NeoBundle 'IndexedSearch'
 " XML/HTML tags navigation
-Bundle 'matchit.zip'
+NeoBundle 'matchit.zip'
 " Gvim colorscheme
-Bundle 'Wombat'
+NeoBundle 'Wombat'
 " Bash support
-Bundle 'bash-support.vim'
+NeoBundle 'bash-support.vim'
 " Markdown
-" Bundle 'instant-markdown.vim'
-" Bundle 'Markdown'
+" NeoBundle 'instant-markdown.vim'
+" NeoBundle 'Markdown'
 " C and C++ stuff
-Bundle 'Brace-Complete-for-CCpp'
-Bundle 'cpp.vim'
-Bundle 'c.vim'
+NeoBundle 'Brace-Complete-for-CCpp'
+NeoBundle 'cpp.vim'
+"NeoBundle 'c.vim'
 " Ruby stuff
-Bundle 'ruby.vim'
+NeoBundle 'ruby.vim'
 " Git integration
-Bundle 'fugitive.vim'
-Bundle 'motemen/git-vim'
+NeoBundle 'fugitive.vim'
+" NeoBundle 'motemen/git-vim'
 " Tab list panel
-Bundle 'kien/tabman.vim'
+NeoBundle 'kien/tabman.vim'
 " Syntax check
-Bundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 " Autocompletion
-Bundle 'Valloric/YouCompleteMe'
-" Scala
-Bundle 'derekwyatt/vim-scala'
-Bundle 'scala.vim'
+NeoBundle 'Valloric/YouCompleteMe'
 
+NeoBundle 'Lokaltog/vim-powerline'
 
-Bundle 'vundle'
+NeoBundle 'Shougo/unite.vim'
 
-Bundle 'Erlang-plugin-package'
+NeoBundle 'ZoomWin'
 
-Bundle 'Lokaltog/vim-powerline'
+" Required:
+call neobundle#end()
 
-" Disabled
-" Autocompletion
-"Bundle 'AutoComplPop'
-"Bundle 'neocomplcache'
-"Bundle 'clang-complete'
+" Required:
+filetype plugin indent on
 
-" SuperTab
-"Bundle 'ervandew/supertab'
-"Bundle 'OmniCppComplete'
-
-" Installing plugins the first time
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-    echo ""
-    :BundleInstall
-endif
+" If there are uninstalled NeoBundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -147,7 +129,7 @@ set novisualbell
 set t_vb=
 set tm=500
 " Let vim share clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -222,8 +204,8 @@ endif
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set smarttab
 
 set lbr
@@ -234,8 +216,6 @@ set smartindent "Smart indent
 set cindent
 set wrap "Wrap lines
 set showmatch
-set shiftwidth=4
-set tabstop=4
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe Options
@@ -243,7 +223,7 @@ set tabstop=4
 " Close preview window after completion
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_global_ycm_extra_conf ='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
 
@@ -452,3 +432,12 @@ set scrolloff=3
 
 " Hide the default mode text
 set noshowmode
+
+""""""""""""""""""""""""""""
+" => Synstatic
+" """"""""""""""""""""""""""
+
+"let g:syntastic_cpp_include_dirs = ['../include','include', '/home/benoit/projects/wt/install/include/']
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list = 0 
