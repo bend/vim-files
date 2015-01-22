@@ -35,6 +35,7 @@ fi
 
 mv vim-files/ $HOME/.vim/
 ln -s $HOME/.vim/vimrc/.vimrc $HOME
+ln -s $HOME/.vim/vimrc/.ycm_extra_conf.py $HOME
 
 
 

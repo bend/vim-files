@@ -7,10 +7,10 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 
   " Required:
-  set runtimepath+=/home/benoit/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#begin(expand('/home/benoit/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Better file browse"r
 NeoBundle 'scrooloose/nerdtree'
@@ -27,6 +27,8 @@ NeoBundle 'IndexedSearch'
 NeoBundle 'matchit.zip'
 " Gvim colorscheme
 NeoBundle 'Wombat'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'flazz/vim-colorschemes'
 " Bash support
 NeoBundle 'bash-support.vim'
 " Markdown
@@ -65,8 +67,12 @@ NeoBundle 'elzr/vim-json'
 
 " Fast fold for faster reading of large files
 NeoBundle 'Konfekt/FastFold' 
+
 " Scroll through colorschemes with :SCROLL
 NeoBundle 'vim-scripts/ScrollColors'
+
+" Tmux integration
+NeoBundle "benmills/vimux"
 
 
 " Required:
@@ -97,8 +103,8 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "<"
+let g:mapleader = "<"
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -164,11 +170,14 @@ if has("gui_running")
   set guifont=Liberation\ Mono\ 10
 else
   set t_Co=256
- "colorscheme zellner
- colorscheme ir_black
  set background=dark
+"colorscheme solarized
+ colorscheme ir_black
+ let g:solarized_termcolors=256
 endif
 
+" Make sure we don't put byte order marks in files
+set nobomb
 set encoding=utf8
 try
     lang en_US
@@ -388,15 +397,6 @@ set grepprg=/usr/bin/grep\ -nH
     map <C-H> <C-W>h<C-W>_
     map <C-K> <C-W>k<C-W>_
 
-"""""""""""""""""""""""""""""""
-"" => SuperTab
-"""""""""""""""""""""""""""""""
-""let g:SuperTabDefaultCompletionType="context"
-""let g:SuperTabLongestHighlight=1
-"""let g:SuperTabDefaultCompletionType = "\<c-x>\<c-o>"
-""au filetype html let g:SuperTabDefaultCompletionType = "\<c-x>\<c-o>"
-""au filetype css let g:SuperTabDefaultCompletionType = "\<c-x>\<c-o>"
-"
 """"""""""""""""""""""""""""""
 " => Plugin conf
 """"""""""""""""""""""""""""""
@@ -452,7 +452,15 @@ set noshowmode
 " => Synstatic
 " """"""""""""""""""""""""""
 
-let g:syntastic_cpp_include_dirs = ['../include','include', '/home/benoit/projects/wt/install/include/']
+let g:syntastic_cpp_include_dirs = ['../include','include', '/home/benoit/projects/wt/install/include/, /opt/software/boost/boost_1_55_0/include']
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list = 0 
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Werror=return-type'
+
+"""""""""""""""""""""""""""
+" => Vimux
+"""""""""""""""""""""""""""
+let g:VimuxHeight = "15"
+map <Leader>t :VimuxTogglePane<CR>
+map <Leader>c :VimuxPromptCommand<CR>
