@@ -74,6 +74,8 @@ NeoBundle 'vim-scripts/ScrollColors'
 " Tmux integration
 NeoBundle "benmills/vimux"
 
+NeoBundle "pangloss/vim-javascript"
+
 
 " Required:
 call neobundle#end()
@@ -117,12 +119,17 @@ ca w!! w !sudo tee "%"
 " Enable mouse support in vim
 set mouse=a
 
+set cursorline
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the curors - when moving vertical..
 set so=7
 set ruler "Always show current position
+
+set showcmd
+set showmode
 
 set wildmenu
 " Set backspace config
@@ -140,7 +147,9 @@ set magic "Set magic on, for regular expressions
 
 set showmatch "Show matching bracets when text indicator is over them
 set mat=2 "How many tenths of a second to blink
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.out,.toc
 
+set shortmess=aTI
 " Fast terminal
 set ttyfast
 
@@ -227,17 +236,17 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab
+
+" Tabs and indenting
+set tabstop=4
 set shiftwidth=2
-set tabstop=2
+set softtabstop=4
 set smarttab
 
 set lbr
 set tw=500
 
 set autoindent "Auto indent
-set smartindent "Smart indent
-set cindent
 set wrap "Wrap lines
 set showmatch
 
@@ -292,30 +301,6 @@ au FileType python map <buffer> <leader>D ?def
 
 
 """"""""""""""""""""""""""""""
-" => JavaScript section
-"""""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
-
-au FileType javascript imap <c-t> AJS.log();<esc>hi
-au FileType javascript imap <c-a> alert();<esc>hi
-
-au FileType javascript inoremap <buffer> $r return 
-au FileType javascript inoremap <buffer> $f //--- PH ----------------------------------------------<esc>FP2xi
-
-function! JavaScriptFold() 
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-""""""""""""""""""""""""""""""
 " => CPP Section
 """"""""""""""""""""""""""""""
 " configure tags - add additional tags here or comment out not-used ones
@@ -366,6 +351,15 @@ let OmniCpp_SelectFirstItem = 0
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 autocmd FileType cpp set omnifunc=omni#cpp#complete#Main
 set completeopt=menuone,menu,longest,preview
+
+function! SetWtCppFileType()
+    if &syntax ==? ""
+        set syntax=cpp
+        set filetype=cpp
+    endif
+endfunction
+
+autocmd! BufRead,BufNewFile,BufEnter,BufWinEnter,FileReadPost */src/Wt/* call SetWtCppFileType()
 
 """"""""""""""""""""""""""""""
 " => Ruby Section
