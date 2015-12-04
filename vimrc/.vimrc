@@ -76,6 +76,8 @@ NeoBundle "benmills/vimux"
 
 NeoBundle "pangloss/vim-javascript"
 
+NeoBundle "lervag/vim-latex"
+
 
 " Required:
 call neobundle#end()
@@ -238,9 +240,9 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Tabs and indenting
-set tabstop=4
+set tabstop=8
 set shiftwidth=2
-set softtabstop=4
+set softtabstop=2
 set smarttab
 
 set lbr
