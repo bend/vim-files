@@ -46,11 +46,11 @@ NeoBundle 'fugitive.vim'
 " Tab list panel
 NeoBundle 'kien/tabman.vim'
 " Syntax check
-" NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
 " Autocompletion
 NeoBundle 'Valloric/YouCompleteMe'
 
-NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'vim-airline/vim-airline'
 
 NeoBundle 'Shougo/unite.vim'
 " Ctrl-P for quick fuzzy file opening
@@ -73,6 +73,8 @@ NeoBundle 'vim-scripts/ScrollColors'
 
 " Tmux integration
 NeoBundle "benmills/vimux"
+
+NeoBundle "vim-scripts/a.vim"
 
 
 " Required:
@@ -124,6 +126,9 @@ set mouse=a
 set so=7
 set ruler "Always show current position
 
+set showcmd
+set showmode
+
 set wildmenu
 " Set backspace config
 set backspace=eol,start,indent
@@ -140,7 +145,9 @@ set magic "Set magic on, for regular expressions
 
 set showmatch "Show matching bracets when text indicator is over them
 set mat=2 "How many tenths of a second to blink
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.out,.toc
 
+set shortmess=aTI
 " Fast terminal
 set ttyfast
 
@@ -227,17 +234,17 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab
+
+" Tabs and indenting
+set tabstop=4
 set shiftwidth=2
-set tabstop=2
+set softtabstop=4
 set smarttab
 
 set lbr
 set tw=500
 
 set autoindent "Auto indent
-set smartindent "Smart indent
-set cindent
 set wrap "Wrap lines
 set showmatch
 
@@ -247,7 +254,7 @@ set showmatch
 " Close preview window after completion
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_complete_in_comments_and_strings = 1
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
 
@@ -366,6 +373,15 @@ let OmniCpp_SelectFirstItem = 0
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 autocmd FileType cpp set omnifunc=omni#cpp#complete#Main
 set completeopt=menuone,menu,longest,preview
+
+function! SetWtCppFileType()
+    if &syntax ==? ""
+        set syntax=cpp
+        set filetype=cpp
+    endif
+endfunction
+
+autocmd! BufRead,BufNewFile,BufEnter,BufWinEnter,FileReadPost */src/Wt/* call SetWtCppFileType()
 
 """"""""""""""""""""""""""""""
 " => Ruby Section
