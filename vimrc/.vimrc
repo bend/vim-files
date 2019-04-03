@@ -46,7 +46,7 @@ NeoBundle 'fugitive.vim'
 " Tab list panel
 NeoBundle 'kien/tabman.vim'
 " Syntax check
-"NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/syntastic'
 " Autocompletion
 NeoBundle 'Valloric/YouCompleteMe'
 
@@ -69,7 +69,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'Konfekt/FastFold' 
 
 " Scroll through colorschemes with :SCROLL
-NeoBundle 'vim-scripts/ScrollColors'
+" NeoBundle 'vim-scripts/ScrollColors'
 
 " Tmux integration
 NeoBundle "benmills/vimux"
@@ -78,6 +78,9 @@ NeoBundle "vim-scripts/a.vim"
 NeoBundle "pangloss/vim-javascript"
 NeoBundle "lervag/vim-latex"
 NeoBundle "vim-scripts/DoxygenToolkit.vim"
+NeoBundle "editorconfig/editorconfig-vim"
+
+" NeoBundle "fatih/vim-go"
 
 " Required:
 call neobundle#end()
@@ -370,6 +373,12 @@ autocmd! BufRead,BufNewFile,BufEnter,BufWinEnter,FileReadPost */src/Wt/* call Se
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 "autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+
+""""""""""""""""""""""""""""""
+" => YAML Section
+""""""""""""""""""""""""""""""
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
